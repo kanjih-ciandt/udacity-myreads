@@ -3,6 +3,7 @@ import ShelfBlock from './ShelfBlock';
 import { StyleSheet, css } from 'aphrodite';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
+import { Link } from 'react-router-dom';
 
 const useStyles = StyleSheet.create({
     fab: {
@@ -28,7 +29,10 @@ class Shelf extends Component {
                 <ShelfBlock name='Currently Reading'/>
                 <ShelfBlock name='Want to Read'/>
                 <ShelfBlock name='Read'/>
-                <Fab color="primary" aria-label="add" className={css(useStyles.fab)}>
+                <Fab color="primary" 
+                     aria-label="add" 
+                     className={css(useStyles.fab)}
+                     component={ Link } to="/search">
                     <AddIcon />
                 </Fab>
             </div>

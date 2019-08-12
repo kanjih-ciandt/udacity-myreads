@@ -12,9 +12,11 @@ import FindBook from './components/FindBook'
 function App() {
   return (
       <div className="App">
-        <ReadHeader/>
         <Route exact path='/' render={() => (
-          <Shelf/>
+          <div>
+            <ReadHeader/>
+            <Shelf/>
+          </div>
         )} />
         <Route path='/search' render={({ history }) => (
           <FindBook/>
