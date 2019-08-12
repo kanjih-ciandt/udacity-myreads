@@ -1,24 +1,17 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
+
 import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
 import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import DoneAll from '@material-ui/icons/DoneAll';
-import Bookmarks from '@material-ui/icons/Bookmarks';
-import BookIcon from '@material-ui/icons/Book';
+import IconButton from '@material-ui/core/IconButton';
+import { makeStyles } from '@material-ui/core/styles';
 import Tooltip from '@material-ui/core/Tooltip';
+import BookIcon from '@material-ui/icons/Book';
+import Bookmarks from '@material-ui/icons/Bookmarks';
+import DoneAll from '@material-ui/icons/DoneAll';
+
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -51,9 +44,6 @@ const useStyles = makeStyles(theme => ({
 }));
 function Book(props) {
   const classes = useStyles();
-  
-
-  
 
   return (
     <Card className={classes.card}>
@@ -67,17 +57,17 @@ function Book(props) {
       <CardActions disableSpacing>
         <Tooltip title="Reading">
           <IconButton aria-label="add to favorites">
-            <BookIcon />
+            <BookIcon color={props.book.shelf==="currentlyReading"? "primary": "action"}  />
           </IconButton>
         </Tooltip>
         <Tooltip title="Want to Read">
           <IconButton aria-label="share" label="Want to read">
-            <Bookmarks/>
+            <Bookmarks color={props.book.shelf==="wantToRead"? "primary": "action"} />
           </IconButton>
         </Tooltip>
         <Tooltip title="Already Read"> 
           <IconButton aria-label="share">
-            <DoneAll />
+            <DoneAll color={props.book.shelf==="read"? "primary": "action"} />
           </IconButton>
         </Tooltip>
       </CardActions>

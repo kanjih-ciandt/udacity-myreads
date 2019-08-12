@@ -4,11 +4,12 @@ import { StyleSheet, css } from 'aphrodite';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import { Link } from 'react-router-dom';
+import * as BooksAPI from '../service/BooksAPI'
 
 const useStyles = StyleSheet.create({
     fab: {
         margin: 1,
-        position: 'absolute',
+        position: 'fixed',
         display: 'block',
         bottom: '30px',
         right: '30px',
@@ -19,16 +20,46 @@ const useStyles = StyleSheet.create({
     },
   });
 
+  
 
 
 
 class Shelf extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { query: '',
+            wantToRead: [],
+            currentlyReading: [],
+            read: []
+           };
+        
+      }
+
+    updateShelf(){
+        BooksAPI.getAll()
+          .then( (books) => {
+            // k.filter(b=> {return b.shelf === "currentlyReading"})
+            this.setState( () => ({
+                wantToRead:  books.filter(b=> {return b.shelf === "wantToRead"}),
+                currentlyReading:  books.filter(b=> {return b.shelf === "currentlyReading"}),
+                read: books.filter(b=> {return b.shelf === "read"})
+            }))
+        })
+    }
+
+
+    componentDidMount(){
+        this.updateShelf();
+        
+    }
+
     render(){
+        const { wantToRead, currentlyReading, read } = this.state
         return (
             <div>
-                <ShelfBlock name='Currently Reading'/>
-                <ShelfBlock name='Want to Read'/>
-                <ShelfBlock name='Read'/>
+                <ShelfBlock name='Currently Reading' books={currentlyReading} />
+                <ShelfBlock name='Want to Read' books={wantToRead}/>
+                <ShelfBlock name='Read' books={read}/>
                 <Fab color="primary" 
                      aria-label="add" 
                      className={css(useStyles.fab)}

@@ -1,21 +1,15 @@
-import React, { Component } from 'react'
-import TextField from '@material-ui/core/TextField';
-import { Link } from 'react-router-dom';
-import Container from '@material-ui/core/Container';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import ArrowBack from '@material-ui/icons/ArrowBack';
-import IconButton from '@material-ui/core/IconButton';
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import InputBase from '@material-ui/core/InputBase';
-import Divider from '@material-ui/core/Divider';
-import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
-import DirectionsIcon from '@material-ui/icons/Directions';
-import { StyleSheet, css } from 'aphrodite';
-import * as BooksAPI from '../service/BooksAPI'
-import Book from './Book'
+import React, { Component } from 'react';
+
 import Grid from '@material-ui/core/Grid';
+import IconButton from '@material-ui/core/IconButton';
+import InputBase from '@material-ui/core/InputBase';
+import Paper from '@material-ui/core/Paper';
+import ArrowBack from '@material-ui/icons/ArrowBack';
+import SearchIcon from '@material-ui/icons/Search';
+import { css, StyleSheet } from 'aphrodite';
+import { Link } from 'react-router-dom';
+import * as BooksAPI from '../service/BooksAPI';
+import Book from './Book';
 
 const useStyles = StyleSheet.create({
     root: {
@@ -44,8 +38,7 @@ class FindBook extends Component {
         super(props);
         this.state = { query: '',
             books: [],
-            typing_interval: 0,
-            typingTimeout: 0 };
+           };
         
       }
 
@@ -97,7 +90,7 @@ class FindBook extends Component {
                 </Paper>
                 <div>
                     <Grid container direction="row"justify="center" alignItems="center"
-                    spacing={2} alignItems="stretch">
+                    spacing={2}>
                         {this.state.books.map( (book) => (
                             <Grid item key={book.id} >
                                 <Book book={book}/>

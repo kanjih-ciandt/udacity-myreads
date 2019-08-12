@@ -4,11 +4,21 @@ import Grid from '@material-ui/core/Grid';
 
 class ShelfBlock extends Component {
     render(){
-        const { name } = this.props
+        const { name, books } = this.props
         return (
             <div>
                 <div>
-                    <h2>dsdsdsds</h2>
+                    <h2>{name}</h2>
+                </div>
+                <div>
+                    <Grid container direction="row"justify="center"
+                    spacing={2} alignItems="stretch">
+                        {books.map( (book) => (
+                            <Grid item key={book.id} >
+                                <Book book={book}/>
+                            </Grid>
+                        ))}
+                    </Grid>
                 </div>
                
             </div>
