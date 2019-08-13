@@ -45,16 +45,13 @@ class Book extends Component  {
   }
 
   
-  handleSubmit = (e) => {
+  updateBook = (e) => {
     e.preventDefault()
-
-    if (this.props.onUpdateBook) {
-      this.props.onUpdateBook(this.props.book, e.currentTarget.value)
-    } else {
-        BooksAPI.update(this.props.book, e.currentTarget.value)
-            .then( (bookResult) => {
-        })
-    } 
+    BooksAPI.update(this.props.book, e.currentTarget.value).then( (bookResult) => {
+      if (this.props.onUpdateParent) {
+        this.props.onUpdateParent()
+      }       
+    })
   }
 
   render(){
@@ -64,24 +61,24 @@ class Book extends Component  {
       <Card className={css(useStyles.card)}>
         <CardMedia
           className={css(useStyles.media)}
-          image={this.props.book.imageLinks.thumbnail}
+          image={book.imageLinks.thumbnail}
         />
         <CardContent className={css(useStyles.content)}>
           <p>{book.title.substring(0,20)}</p>
         </CardContent>
         <CardActions disableSpacing>
             <Tooltip title="Reading">
-              <IconButton aria-label="currently Reading"  value = "currentlyReading" onClick={this.handleSubmit}>
+              <IconButton aria-label="currently Reading"  value = "currentlyReading" onClick={this.updateBook}>
                 <BookIcon color={book.shelf==="currentlyReading"? "primary": "action"}  />
               </IconButton>
             </Tooltip>
             <Tooltip title="Want to Read">
-              <IconButton aria-label="want to read" label="Want to read"  value = "wantToRead" onClick={this.handleSubmit}>
+              <IconButton aria-label="want to read" label="Want to read"  value = "wantToRead" onClick={this.updateBook}>
                 <Bookmarks color={book.shelf==="wantToRead"? "primary": "action"} />
               </IconButton>
             </Tooltip>
             <Tooltip title="Already Read"> 
-              <IconButton aria-label="already read" value = "read" onClick={this.handleSubmit}>
+              <IconButton aria-label="already read" value = "read" onClick={this.updateBook}>
                 <DoneAll color={book.shelf==="read"? "primary": "action"} />
               </IconButton>
             </Tooltip>

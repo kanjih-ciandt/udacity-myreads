@@ -32,8 +32,7 @@ class Shelf extends Component {
             currentlyReading: [],
             read: []
            };
-        this.updateShelf = this.updateShelf.bind(this)
-        
+        this.updateShelf = this.updateShelf.bind(this);
       }
     
     

@@ -10,6 +10,7 @@ import { css, StyleSheet } from 'aphrodite';
 import { Link } from 'react-router-dom';
 import * as BooksAPI from '../service/BooksAPI';
 import Book from './Book';
+import { Redirect } from 'react-router-dom'
 
 const useStyles = StyleSheet.create({
     root: {
@@ -38,13 +39,15 @@ class FindBook extends Component {
         super(props);
         this.state = { query: '',
             books: [],
+            toHome: false
            };
+        this.updateParent = this.updateParent.bind(this);
         
       }
 
 
     componentDidMount(){
-        this.getAllBooks()
+        this.getAllBooks();
       }   
 
     updateQuery = (query) => {
@@ -61,6 +64,14 @@ class FindBook extends Component {
         })
     }
 
+    updateParent(){
+        this.setState(() => ({
+            toHome: true
+        }));
+        
+        
+    }
+
     getAllBooks(){
         BooksAPI.getAll()
           .then( (books) => {
@@ -73,6 +84,10 @@ class FindBook extends Component {
 
     render(){
         const { query } = this.state
+
+        if (this.state.toHome === true) {
+            return <Redirect to='/' />
+          }
 
         return (
             <div className='list-books'>
@@ -97,7 +112,10 @@ class FindBook extends Component {
                     spacing={2}>
                         {this.state.books.map( (book) => (
                             <Grid item key={book.id} >
-                                <Book book={book}/>
+                                <Book book={book} onUpdateParent={() => {
+                                    this.updateParent()
+                                    
+                                }}/>
                             </Grid>
                         ))}
                     </Grid>
