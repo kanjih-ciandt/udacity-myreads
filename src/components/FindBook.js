@@ -44,12 +44,7 @@ class FindBook extends Component {
 
 
     componentDidMount(){
-        BooksAPI.getAll()
-          .then( (books) => {
-            this.setState( () => ({
-                books
-            }))
-          })
+        this.getAllBooks()
       }   
 
     updateQuery = (query) => {
@@ -64,7 +59,16 @@ class FindBook extends Component {
                 books
             }))
         })
-      }
+    }
+
+    getAllBooks(){
+        BooksAPI.getAll()
+          .then( (books) => {
+            this.setState( () => ({
+                books
+            }))
+          })
+    }
 
 
     render(){

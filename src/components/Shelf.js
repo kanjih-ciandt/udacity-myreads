@@ -32,13 +32,14 @@ class Shelf extends Component {
             currentlyReading: [],
             read: []
            };
+        this.updateShelf = this.updateShelf.bind(this)
         
       }
-
+    
+    
     updateShelf(){
         BooksAPI.getAll()
           .then( (books) => {
-            // k.filter(b=> {return b.shelf === "currentlyReading"})
             this.setState( () => ({
                 wantToRead:  books.filter(b=> {return b.shelf === "wantToRead"}),
                 currentlyReading:  books.filter(b=> {return b.shelf === "currentlyReading"}),
@@ -57,9 +58,9 @@ class Shelf extends Component {
         const { wantToRead, currentlyReading, read } = this.state
         return (
             <div>
-                <ShelfBlock name='Currently Reading' books={currentlyReading} />
-                <ShelfBlock name='Want to Read' books={wantToRead}/>
-                <ShelfBlock name='Read' books={read}/>
+                <ShelfBlock name='Currently Reading' books={currentlyReading} onUpdateShelf={this.updateShelf} />
+                <ShelfBlock name='Want to Read' books={wantToRead} onUpdateShelf={this.updateShelf} />
+                <ShelfBlock name='Read' books={read} onUpdateShelf={this.updateShelf} />
                 <Fab color="primary" 
                      aria-label="add" 
                      className={css(useStyles.fab)}
