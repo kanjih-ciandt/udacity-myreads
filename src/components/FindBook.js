@@ -68,8 +68,6 @@ class FindBook extends Component {
         this.setState(() => ({
             toHome: true
         }));
-        
-        
     }
 
     getAllBooks(){
