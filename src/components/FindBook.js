@@ -47,21 +47,27 @@ class FindBook extends Component {
 
 
     componentDidMount(){
-        this.getAllBooks();
+        
       }   
 
     updateQuery = (query) => {
         this.setState(() => ({
-            query: query.trim()
+            query: query
         }));
-        (query.trim() && query.trim().length) &&
-        BooksAPI.search(query.trim())
-        .then( (books) => {
-            (books && books.length) &&
-            this.setState( () => ({
-                books
-            }))
-        })
+        
+        if (query.trim() && query.trim().length){
+            BooksAPI.search(query.trim())
+            .then( (books) => {
+                (books && books.length) &&
+                this.setState( () => ({
+                    books
+                }))
+            })
+        } else {
+            this.setState(() => ({
+                books: []
+            }));
+        }
     }
 
     updateParent(){

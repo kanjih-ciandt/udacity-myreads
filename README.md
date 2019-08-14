@@ -1,4 +1,12 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+# MyReads Project
+
+This is a simple React Project to manager your Book List
+
+## Project Setup
+
+* clone the Project - `git clone https://github.com/kanjih-ciandt/udacity-myreads`
+* install the dependencies - `npm install`
 
 ## Available Scripts
 

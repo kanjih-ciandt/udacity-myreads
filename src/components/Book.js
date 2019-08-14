@@ -32,6 +32,17 @@ const useStyles = StyleSheet.create({
   avatar: {
     backgroundColor: red[500],
   },
+  title: {
+    margin: '1px',
+    textAlign: 'center',
+    
+    fontSize: '14px',
+  },
+  author: {
+    textAlign: 'center',
+    
+    fontSize: '12px',
+  },
 });
 
 class Book extends Component  {
@@ -56,15 +67,25 @@ class Book extends Component  {
 
   render(){
     const { book } = this.state
+    let author;
+    if (book.authors) {
+      author = <p className={css(useStyles.author)}>{book.authors.toString()}</p>
+    }
+
+    let thumbnail;
+    if(book.imageLinks && book.imageLinks.thumbnail) {
+      thumbnail = book.imageLinks.thumbnail
+    } 
 
     return (
       <Card className={css(useStyles.card)}>
         <CardMedia
           className={css(useStyles.media)}
-          image={book.imageLinks.thumbnail}
+          image={thumbnail}
         />
         <CardContent className={css(useStyles.content)}>
-          <p>{book.title.substring(0,20)}</p>
+          <p className={css(useStyles.title)}>{book.title.substring(0,20)}</p>
+          {author}
         </CardContent>
         <CardActions disableSpacing>
             <Tooltip title="Reading">
