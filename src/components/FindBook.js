@@ -63,6 +63,11 @@ class FindBook extends Component {
                     books
                 }))
             })
+            .catch((err) => {
+                this.setState(() => ({
+                    books: []
+                }))
+            })
         } else {
             this.setState(() => ({
                 books: []
